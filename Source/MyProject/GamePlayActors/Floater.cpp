@@ -29,6 +29,11 @@ void AFloater::BeginPlay()
 
 	if(bInitializeFloaterLocations)
 		SetActorLocation(InitialLocation);
+
+	FHitResult HitResult;
+	FVector LocalOffset = FVector(200.0f, 0.0f, 0.0f);
+	AddActorLocalOffset(LocalOffset, true, &HitResult);
+	//AddActorWorldOffset(LocalOffset, true, &HitResult);
 }
 
 // Called every frame
@@ -45,5 +50,9 @@ void AFloater::Tick(float DeltaTime)
 
 		//UE_LOG(LogTemp, Warning, TEXT("Hit Locatio: X = %f, Y = %f, Z = %f"), HitLocation.X, HitLocation.Y, HitLocation.Z);
 	}
+
+	FRotator Rotation = FRotator(0.0f, 0.0f, 1.0f);
+	AddActorLocalRotation(Rotation);
+	//AddActorWorldRotation(Rotation);
 }
 
