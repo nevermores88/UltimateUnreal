@@ -22,6 +22,13 @@ AFloater::AFloater()
 
 	InitialForce = FVector(20000000.0f, 0.0f, 0.0f);
 	InitialTorque = FVector(20000000.0f, 0.0f, 0.0f);
+
+	RunningTime = 0.0f;
+
+	A = 0.0f;
+	B = 0.0f;
+	C = 0.0f;
+	D = 0.0f;
 }
 
 // Called when the game starts or when spawned
@@ -42,8 +49,7 @@ void AFloater::BeginPlay()
 	if(bInitializeFloaterLocations)
 		SetActorLocation(InitialLocation);
 
-	/*StaticMesh->AddForce(InitialForce);
-	StaticMesh->AddTorque(InitialTorque);*/
+	BaseZLocation = PlacedLocation.Z;
 }
 
 // Called every frame
@@ -53,12 +59,12 @@ void AFloater::Tick(float DeltaTime)
 
 	if (bShouldFloat)
 	{
-		FHitResult HitResult;
-		AddActorLocalOffset(InitialDirection, true, &HitResult);
+		FVector NewLocation = GetActorLocation();
 
-		FVector HitLocation = HitResult.Location;
+		NewLocation.Z = BaseZLocation + A * FMath::Sin(B * RunningTime - C) + D;
 
-		//UE_LOG(LogTemp, Warning, TEXT("Hit Locatio: X = %f, Y = %f, Z = %f"), HitLocation.X, HitLocation.Y, HitLocation.Z);
+		SetActorLocation(NewLocation);
+		RunningTime += DeltaTime;
 	}
 }
 
