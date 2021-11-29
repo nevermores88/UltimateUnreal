@@ -41,4 +41,10 @@ public:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 
+	void TurnAtRate(float Rate);
+
+	void LookUpAtRate(float Rate);
+
+	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 };
