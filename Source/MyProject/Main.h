@@ -6,6 +6,14 @@
 #include "GameFramework/Character.h"
 #include "Main.generated.h"
 
+UENUM(BlueprintType)
+enum class EMovemeStatus : uint8
+{
+	EMS_Normal UMETA(DisplayName="Normal"),
+	EMS_Sprinting UMETA(DisplayName="Sprinting"),
+	EMS_MAX UMETA(DisplayName="DefaultMax")
+};
+
 UCLASS()
 class MYPROJECT_API AMain : public ACharacter
 {
@@ -14,7 +22,27 @@ class MYPROJECT_API AMain : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AMain();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Enums")
+	EMovemeStatus MovementStatus;
 	
+	/* Set movement status and running speed */
+	void SetMovementStatus(EMovemeStatus Status);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Running")
+	float RunningSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Running")
+	float SprintingSpeed;
+
+	bool bShiftKeyDown;
+
+	/* Pressed down to enable sprinting */
+	void ShiftKeyDown();
+
+	/* Released to stop sprinting */
+	void ShiftKeyUp();
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera, meta=(AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
 
