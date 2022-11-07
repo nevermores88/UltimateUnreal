@@ -21,8 +21,8 @@ AItem::AItem()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(GetRootComponent());
 
-	IdlePartilcesComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("IdleParticlesComponent"));
-	IdlePartilcesComponent->SetupAttachment(GetRootComponent());
+	IdleParticlesComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("IdleParticlesComponent"));
+	IdleParticlesComponent->SetupAttachment(GetRootComponent());
 
 	bRotate = false;
 	RotationRate = 45.0f;
@@ -61,8 +61,6 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	{
 		UGameplayStatics::PlaySound2D(this, OverlapSound);
 	}
-
-	Destroy();
 }
 
 void AItem::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)

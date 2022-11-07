@@ -24,7 +24,7 @@ public:
 	class UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particles")
-	class UParticleSystemComponent* IdlePartilcesComponent;
+	class UParticleSystemComponent* IdleParticlesComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particles")
 	class UParticleSystem* OverlapParticles;
