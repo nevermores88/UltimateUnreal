@@ -9,7 +9,7 @@
 UENUM(BlueprintType)
 enum class EEnemyMovementStatus : uint8
 {
-	EMS_IDLE					UMETA(DisplayName = "Idle"),
+	EMS_Idle					UMETA(DisplayName = "Idle"),
 	EMS_MoveToTarget		UMETA(DisplayName = "MoveToTarget"),
 	EMS_Attacking			UMETA(DisplayName = "Attacking"),
 	EMS_MAX					UMETA(DisplayName = "DefaultMax")
@@ -61,5 +61,12 @@ public:
 	UFUNCTION()
 	virtual void CombatOnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	UFUNCTION(BlueprintCallable)
 	void MoveToTarget(class AMain* Target);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="AI")
+	bool bOverlappingCombatSphere;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="AI")
+	AMain* CombatTarget;
 };
